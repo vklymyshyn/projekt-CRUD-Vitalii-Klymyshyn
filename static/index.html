@@ -1,39 +1,65 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Book Manager CRUD</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <h1>Book Manager CRUD</h1>
 
     <section class="form-section">
-      <h2>Dodaj książkę</h2>
+      <h2 id="form-title">Add / Edit Book</h2>
       <form id="book-form">
-        <label>Tytuł: <input type="text" id="title" required /></label>
-        <label>Autor: <input type="text" id="author" required /></label>
-        <label
-          >Cena: <input type="number" id="price" min="0" step="0.01"
-        /></label>
-        <label>Rok: <input type="number" id="published_year" min="0" /></label>
-        <button type="submit">Zapisz</button>
+        <input type="hidden" id="book-id" />
+
+        <label>
+          Title:
+          <input type="text" id="title" required />
+        </label>
+
+        <label>
+          Author:
+          <input type="text" id="author" required />
+        </label>
+
+        <label>
+          Price:
+          <input type="number" id="price" step="0.01" min="0" required />
+        </label>
+
+        <label>
+          Published year:
+          <input type="number" id="published_year" min="0" required />
+        </label>
+
+        <label>
+          Description:
+          <textarea id="description"></textarea>
+        </label>
+
+        <button type="submit" id="save-btn">Save</button>
+        <button type="button" id="reset-btn">Reset form</button>
       </form>
+      <div id="form-error" class="error"></div>
     </section>
 
     <section class="list-section">
-      <h2>Lista książek</h2>
+      <h2>Books list</h2>
       <table id="books-table">
         <thead>
           <tr>
             <th>ID</th>
-            <th>Tytuł</th>
-            <th>Autor</th>
-            <th>Cena</th>
-            <th>Rok</th>
+            <th>Title / Author</th>
+            <th>Price</th>
+            <th>Year</th>
+            <th>Description</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody id="books-tbody"></tbody>
       </table>
+      <div id="list-error" class="error"></div>
     </section>
 
     <script src="script.js"></script>
