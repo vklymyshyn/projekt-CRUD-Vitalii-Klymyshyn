@@ -9,12 +9,15 @@ def get_connection():
     return conn
 
 def run_migration():
-    """Create table if not exists using SQL migration file."""
+    """Execute all SQL files in migrations/ sorted by name."""
     migrations_dir = Path("migrations")
-    migration_file = migrations_dir / "001_create_books_table.sql"
+    sql_files = sorted(p for p in migrations_dir.glob("*.sql"))
+    if not sql_files:
+        return
 
     with get_connection() as conn:
-        with open(migration_file, "r", encoding="utf-8") as f:
-            sql = f.read()
-            conn.executescript(sql)
+        for f in sql_files:
+            with open(f, "r", encoding="utf-8") as fh:
+                sql = fh.read()
+                conn.executescript(sql)
         conn.commit()
